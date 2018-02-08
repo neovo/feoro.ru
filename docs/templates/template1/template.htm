@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><?php Core_Page::instance()->showTitle()?></title>
+<meta content="text/html; charset=<?php echo SITE_CODING?>" http-equiv="Content-Type" />
+<meta name="description" content="<?php Core_Page::instance()->showDescription()?>" />
+<meta name="keywords" content="<?php Core_Page::instance()->showKeywords()?>" />
+<?php
+Core_Page::instance()
+->css('/hostcmsfiles/jquery/highslide/highslide.css')
+->showCss();
+?>
+<?php
+Core_Browser::check()
+?>
+<link rel="shortcut icon" href="/favicon.ico" />
+<?php
+Core_Page::instance()
+->js('/hostcmsfiles/jquery/jquery.min.js')
+->js('/hostcmsfiles/jquery/jquery.validate.min.js')
+->js('/templates/template1/hostcms.js')
+->js('/hostcmsfiles/main.js')
+->js('/hostcmsfiles/jquery/highslide/highslide.js')
+->js('/hostcmsfiles/jquery/easing.js')
+->js('/hostcmsfiles/jquery/jquery.ui.totop.js')
+->js('/hostcmsfiles/jquery/jquery.cycle.all.min.js')
+->js('/hostcmsfiles/jquery/jquery.cycle2.carousel.min.js')
+->js('/hostcmsfiles/jquery/custom.js')
+->showJs();
+?>
+<!--хайслайд-->
+<script>
+hs.registerOverlay({
+html: '<div class="n-closebutton" onclick="return hs.close(this)" title="Close"></div>',
+position: 'top right',
+fade: 2 // fading the semi-transparent overlay looks bad in IE
+});
+hs.graphicsDir = '/hostcmsfiles/jquery/highslide/graphics/';
+hs.wrapperClassName = 'borderless';
+</script>
+<!--кнопка вверх-->
+<script>
+$(document).ready(function() {
+$().UItoTop({ easingType: 'easeOutQuart' });
+});
+</script>
+</head>
+<body>
+<div class="container">
+<?php
+Core_Page::instance()->execute()
+?>
+</div>
+<!--подвал-->
+<footer>
+<!--бренды-->
+<div class="brands">
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 1)
+);
+$Informationsystem_Controller_Show
+->informationsystemItems()
+->queryBuilder()
+->clearOrderBy()
+->orderBy('RAND()');
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('БрендыВподвале')
+)
+->groupsMode('none')
+->itemsProperties(TRUE)
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(5)
+->show();
+?>
+</div>
+<!--/бренды-->
+<!--контакты-->
+<div class="content">
+<?php
+if(CURRENT_STRUCTURE_ID != 1)
+{
+?>
+<a href="/" class="logo"><?php Core_Page::instance()->showTitle()?></a>
+<?php
+}
+else
+{
+?>
+<span class="logo"><?php Core_Page::instance()->showTitle()?></span>
+<?php
+}
+?>
+<ul>
+<li>ООО "ФЕОРО-СТРОЙ", 2017г.<br />Пандусы в Новосибирске</li>
+<li>г. Новосибирск<br /><a href="tel:+73832461290">(383) 359-51-69</a></li>
+<li>Проспект Димитрова, 7<br />Офис 411А</li>
+
+
+
+</ul>
+<!--/контакты-->
+<!--счетчики-->
+<!--noindex-->
+<div class="counters">
+<span><a href="http://hostcms.ru/" target="_blank" rel="nofollow">Hostcms</a></span>
+</div>
+<!--/noindex-->
+<!--/счетчики-->
+</div>
+</footer>
+<!--/подвал-->
+<!--шапка-->
+<header>
+<!--меню-->
+<?php
+$Structure_Controller_Show = new Structure_Controller_Show(
+Core_Entity::factory('Site', CURRENT_SITE));
+$Structure_Controller_Show->xsl(Core_Entity::factory('Xsl')
+->getByName('Верхнее'))
+->menu(1)
+->show();
+?>
+<!--/меню-->
+<div class="content">
+<?php
+if(CURRENT_STRUCTURE_ID != 1)
+{
+?>
+<a href="/" class="logo"><?php Core_Page::instance()->showTitle()?></a>
+<?php
+}
+else
+{
+?>
+<span class="logo"><?php Core_Page::instance()->showTitle()?></span>
+<?php
+}
+?>
+<!--контакты-->
+<ul class="cnt">
+<li>Выезд на замеры - бесплатно!<br /><a href="tel:+73833595169">+7 (383) 359-51-69</a></li>
+<li><a href="#" class="callback">Заказать бесплатный звонок</a></li>
+</ul>
+</div>
+</header>
+<!--/шапка-->
+<!--выпадающее окно-->
+<div class="overlay"></div>
+<div class="popup">
+<div class="pc">
+<h6>Заказать обратный звонок</h6>
+<p class="cbok">Наш менеджер свяжется с Вами в ближайшее время.</p>
+<form class="fofm validate" method="post">
+<input type="hidden" name="txttheme" value="Заказ обратного звонка с feoro.ru" />
+<ul>
+<li><input type="text" placeholder="Ваше имя" name="txtname" value="" size="30" class="required" /></li>
+<li><input type="text" placeholder="E-mail" name="txtemail" value="" size="30" class="required" /></li>
+<li><input type="text" placeholder="Номер телефона" name="txtphone" class="required" /></li>
+<li><input type="submit" class="button" value="Отправить" name="btnsend" /></li>
+</ul>
+</form>
+</div>
+</div>
+<!--/выпадающее окно-->
+<!--выпадающее окно-->
+<div class="overlay2"></div>
+<div class="popup2">
+<div class="pc">
+<h6>Заказать бесплатный выезд специалиста</h6>
+<p class="cbok2">Наш менеджер свяжется с Вами в ближайшее время.</p>
+<form class="fofm2 validate" method="post">
+<input type="hidden" name="txttheme" value="Заказ бесплатного выезда специалиста с feoro.ru" />
+<ul>
+<li><input type="text" placeholder="Ваше имя" name="txtname" value="" size="30" class="required" /></li>
+<li><input type="text" placeholder="E-mail" name="txtemail" value="" size="30" class="required" /></li>
+<li><input type="text" placeholder="Номер телефона" name="txtphone" class="required" /></li>
+<li><textarea placeholder="Комментарий" name="txttext" cols="10" rows="20"></textarea></li>
+<li><input type="submit" class="button" value="Отправить" name="btnsend" /></li>
+</ul>
+</form>
+</div>
+</div>
+<!--/выпадающее окно-->
+</body>
+</html>

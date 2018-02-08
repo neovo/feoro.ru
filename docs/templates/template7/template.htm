@@ -1,0 +1,121 @@
+<!--баннер-->
+<div class="banner">
+<div class="content">
+<h4>Производство, монтаж пандусов<br />и подъемных систем в Новосибирске.<br /><span>Строительные работы.</span></h4>
+<a href="#" title="Просмотреть проекты"><span>Просмотреть проекты</span></a>
+</div>
+</div>
+<!--/баннер-->
+<!--преимущества-->
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 2)
+);
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('Преимущества')
+)
+->groupsMode('none')
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(4)
+->show();
+?>
+<!--/преимущества-->
+<!--проекты-->
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 6)
+);
+$Informationsystem_Controller_Show
+->informationsystemItems()
+->queryBuilder()
+->clearOrderBy()
+->orderBy('RAND()');
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('ПроектыНаГлавной')
+)
+->groupsMode('none')
+->itemsProperties(TRUE)
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(30)
+->show();
+?>
+<!--/проекты-->
+<!--о компании-->
+<div class="about">
+<div class="content clear">
+<?php
+Core_Page::instance()->execute();
+?>
+</div>
+</div>
+<!--/о компании-->
+<!--новости-->
+<div class="nb">
+<div class="content clear">
+<!--новости компании-->
+<div>
+<div class="nbl">
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 3)
+);
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('НовостиНаГлавной')
+)
+->groupsMode('none')
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(1)
+->show();
+?>
+</div>
+</div>
+<!--/новости компании-->
+<!--новости отрасли-->
+<div class="nbr">
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 4)
+);
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('НовостиНаГлавной')
+)
+->groupsMode('none')
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(2)
+->show();
+?>
+</div>
+<!--/новости отрасли-->
+</div>
+</div>
+<!--/новости-->
+<!--клиенты-->
+<?php
+$Informationsystem_Controller_Show = new Informationsystem_Controller_Show(
+Core_Entity::factory('Informationsystem', 5)
+);
+$Informationsystem_Controller_Show
+->informationsystemItems()
+->queryBuilder()
+->clearOrderBy()
+->orderBy('RAND()');
+$Informationsystem_Controller_Show
+->xsl(
+Core_Entity::factory('Xsl')->getByName('ОтзывыНаГлавной')
+)
+->groupsMode('none')
+->itemsProperties(TRUE)
+->itemsForbiddenTags(array('text'))
+->group(FALSE)
+->limit(10)
+->show();
+?>
+<!--/клиенты-->
